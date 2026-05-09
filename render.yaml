@@ -1,5 +1,4 @@
 services:
-  # ── Backend API ────────────────────────────────────────────────────────────
   - type: web
     name: coprep-api
     runtime: python
@@ -11,24 +10,10 @@ services:
       - key: PYTHON_VERSION
         value: 3.12.0
       - key: GROQ_API_KEY
-        sync: false           # set manually in Render dashboard
+        sync: false
       - key: JWT_SECRET
-        generateValue: true   # Render auto-generates a secure random string
+        generateValue: true
       - key: DATABASE_URL
-        sync: false           # paste your Neon PostgreSQL URL here
+        sync: false
       - key: ALLOWED_ORIGINS
-        sync: false           # set to https://coprep-web.onrender.com after first deploy
-
-  # ── Frontend static site ───────────────────────────────────────────────────
-  - type: static
-    name: coprep-web
-    rootDir: frontend
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    envVars:
-      - key: VITE_API_URL
-        sync: false           # set to https://coprep-api.onrender.com
-    routes:
-      - type: rewrite
-        source: /*
-        destination: /index.html  # SPA fallback — all paths serve index.html
+        sync: false
